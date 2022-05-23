@@ -1,7 +1,13 @@
-import Component1 from "./Component1";
+import EventPractice1 from "./EventPractice1";
+import EventPractice2 from "./EventPractice2";
+import EventPractice3 from "./EventPractice3";
 
 const MainComponent = () => {
-    return <Component1>WOW!!</Component1>
+    return (
+        //<EventPractice1/> <br/>
+        //<EventPractice2/>
+        <EventPractice3/>
+    )
 };
 
 export default MainComponent;
