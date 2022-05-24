@@ -1,7 +1,9 @@
-import Component1 from "./Component1";
+import Iteration from "./Iteration";
 
 const MainComponent = () => {
-    return <Component1>WOW!!</Component1>
+    return (
+        <Iteration/>
+    )
 };
 
 export default MainComponent;
