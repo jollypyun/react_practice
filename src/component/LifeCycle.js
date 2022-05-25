@@ -12,8 +12,63 @@ class LifeCycle extends Component {
         console.log('constructor');
     }
 
-    static getDerivedStateFromProps(nextState, prevState) {
-        
+    static getDerivedStateFromProps(nextProps, prevState) {
+        console.log('getDerivedStateFromProps');
+        if(nextProps.color !== prevState.color) {
+            return {color: nextProps.color}
+        }
+        return null
+    }
+
+    componentDidMount() {
+        console.log('componentDidMount');
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('shouldComponentUpdate', nextProps, nextState);
+        return nextState.number % 10 !== 4; // 숫자의 마지막 자리가 4인 경우 리렌더링이 되지 않는다.
+    }
+
+    componentWillUnmount() {
+        console.log('cmponentWillUnmount');
+    }
+
+    handleClick = () => {
+        this.setState({
+            number: this.state.number + 1
+        });
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('getSnapshotBeforeUpdate');
+        if(prevProps.color !== this.props.color) {
+            return this.myRef.style.color;
+        }
+        return null;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('componentDidUpdate', prevProps, prevState);
+        if(snapshot) {
+            console.log('업데이트 되기 전 색상 : ', snapshot);
+        }
+    }
+
+    render() {
+        console.log('render');
+
+        const style = {
+            color: this.props.color
+        };
+
+        return (
+            <div>
+                {this.props.missing.value}
+                <h1 style={style} ref={ref => this.myRef=ref}>{this.state.number}</h1>
+                <p>color: {this.state.color}</p>
+                <button onClick={this.handleClick}>더하기</button>
+            </div>
+        )
     }
 }
 
